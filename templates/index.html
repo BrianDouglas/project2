@@ -1,0 +1,32 @@
+{% extends "layout.html"%}
+
+{% block heading%}
+
+Welcome to Chatland
+
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-lg-3 col-md-12" id="settingsPane">
+            <h4 id="nameTag"></h4>
+            <input type="text" id="displayName" name="displayName">
+            <button id="updateName">Set</button><br><br>
+
+            <h4>Select a channel to chat in</h4>
+            <select name="channelList" id="channelList">
+            </select><br>
+
+            <h4>Create a new channel</h4>
+            <form id="newChannelForm">
+                <input type="text" id="newChannelName" name="newChannelName" autocomplete="off">
+                <input type="submit" id="createChannel" value="Create"></input>
+            </form><br>
+    </div>
+    <div class="col-lg-9 col-md-12" id="chattingPane">
+        we be chatting here
+    </div>
+</div>
+
+{% endblock %}
