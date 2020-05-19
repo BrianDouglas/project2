@@ -17,12 +17,47 @@ input[type=text] {
   width: 75%;
 }
 
+.chatmsg, .mymsg {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.chatmsg {
+  text-align: left;
+  background-color: #9c619c;
+}
+
+.mymsg {
+  text-align: right;
+  background-color: #a300a3;
+}
+
+#chattyper {
+  align-items: right;
+}
+
 #settingsPane, #chattingPane {
   padding: 20px;
   background-color: lightblue;
   border: black;
   border-style: double;
   margin-bottom: 20px;
+}
+
+#nameTag, #channelTag {
+  color: black;
+  width: 50%;
+}
+
+#nameTag {
+  float: left;
+}
+
+#channelTag {
+  float: right;
+  text-align: right;
 }
 
 /*# sourceMappingURL=style.css.map */

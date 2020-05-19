@@ -10,9 +10,6 @@ Welcome to Chatland
 
 <div class="row">
     <div class="col-lg-3 col-md-12" id="settingsPane">
-            <h4 id="nameTag"></h4>
-            <input type="text" id="displayName" name="displayName">
-            <button id="updateName">Set</button><br><br>
 
             <h4>Select a channel to chat in</h4>
             <select name="channelList" id="channelList">
@@ -25,7 +22,19 @@ Welcome to Chatland
             </form><br>
     </div>
     <div class="col-lg-9 col-md-12" id="chattingPane">
-        we be chatting here
+        <h6 id="nameTag"></h6><h6 id="channelTag">mychannel</h6>
+        <br>
+        <div id="msgBox">
+            <div class="chatmsg">
+                chat from other
+            </div>
+            <div class="mymsg">
+                chat from me
+            </div>
+        </div>
+        <div id="chattyper">
+            typing goes here
+        </div>
     </div>
 </div>
 

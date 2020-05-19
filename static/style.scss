@@ -2,6 +2,8 @@ $backgroundColor: rgb(0, 67, 204);
 $textColor: ivory;
 $panelColor: lightblue;
 $panelBorder: black;
+$sentColor: rgb(163, 0, 163);
+$receivedColor: rgb(156, 97, 156);
 
 @import url('https://fonts.googleapis.com/css?family=Roboto Mono');
 
@@ -23,6 +25,27 @@ input[type=text]{
     width: 75%;
 }
 
+.chatmsg, .mymsg{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.chatmsg{
+    text-align: left;
+    background-color: $receivedColor;
+}
+
+.mymsg{
+    text-align: right;
+    background-color: $sentColor;
+}
+
+#chattyper{
+    align-items: right;
+}
+
 #settingsPane, #chattingPane{
     padding: 20px;
     background-color: $panelColor;
@@ -31,4 +54,16 @@ input[type=text]{
     margin-bottom: 20px;
 }
 
+#nameTag, #channelTag{
+    color: black;
+    width: 50%;
+}
 
+#nameTag{
+    float: left;
+}
+
+#channelTag{
+    float: right;
+    text-align: right;
+}
