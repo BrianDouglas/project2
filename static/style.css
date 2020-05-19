@@ -34,6 +34,18 @@ input[type=text] {
   background-color: #a300a3;
 }
 
+.chatText {
+  color: whitesmoke;
+}
+
+.timestamp {
+  color: black;
+}
+
+#channelCreationError {
+  color: red;
+}
+
 #chattyper {
   align-items: right;
 }

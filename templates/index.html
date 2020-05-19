@@ -17,23 +17,20 @@ Welcome to Chatland
 
             <h4>Create a new channel</h4>
             <form id="newChannelForm">
-                <input type="text" id="newChannelName" name="newChannelName" autocomplete="off">
+                <em id="channelCreationError"></em>
+                <input type="text" id="newChannelName" name="newChannelName" autocomplete="off" required>
                 <input type="submit" id="createChannel" value="Create"></input>
             </form><br>
     </div>
     <div class="col-lg-9 col-md-12" id="chattingPane">
-        <h6 id="nameTag"></h6><h6 id="channelTag">mychannel</h6>
+        <h6 id="nameTag"></h6><h6 id="channelTag"></h6>
         <br>
         <div id="msgBox">
-            <div class="chatmsg">
-                chat from other
-            </div>
-            <div class="mymsg">
-                chat from me
-            </div>
+            
         </div>
         <div id="chattyper">
-            typing goes here
+            <input type="text" id="msgToSend" name="msgToSend" autocomplete="off">
+            <button id="chatSend">Send</button>
         </div>
     </div>
 </div>

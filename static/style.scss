@@ -4,6 +4,9 @@ $panelColor: lightblue;
 $panelBorder: black;
 $sentColor: rgb(163, 0, 163);
 $receivedColor: rgb(156, 97, 156);
+$chatTextColor: whitesmoke;
+$timestampColor: black;
+$errorColor: red;
 
 @import url('https://fonts.googleapis.com/css?family=Roboto Mono');
 
@@ -40,6 +43,18 @@ input[type=text]{
 .mymsg{
     text-align: right;
     background-color: $sentColor;
+}
+
+.chatText{
+    color: $chatTextColor;
+}
+
+.timestamp{
+    color: $timestampColor;
+}
+
+#channelCreationError{
+    color: $errorColor;
 }
 
 #chattyper{
