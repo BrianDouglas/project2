@@ -17,12 +17,17 @@ def index():
 
 @app.route("/get_channel", methods=["POST"])
 def get_channel():
+    return jsonify([*channels])
+
+@app.route("/create_channel", methods=["POST"])
+def create_channel():
     channelName = request.form['newChannel']
     print(channelName)
     if channelName in channels:
         return jsonify({"error": "Channel already exists. Try again."})
     elif channelName:
         channels[channelName] = {datetime.now().strftime("%a, %H:%M:%S"): ["serverBot", "Channel has been created"]}
+        socketio.emit('new channel created')
     return jsonify([*channels]) #*channels returns the iterables of the dictionary. Brackets for as a list
 
 @app.route("/get_chat", methods=["Post"])

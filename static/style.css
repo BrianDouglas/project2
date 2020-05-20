@@ -27,13 +27,25 @@ input[type=text] {
 .chatmsg {
   text-align: left;
   background-color: #9c619c;
+  animation: msg 0.5s;
 }
 
 .mymsg {
   text-align: right;
   background-color: #a300a3;
+  animation: msg 0.5s ease;
 }
 
+@keyframes msg {
+  0% {
+    opacity: 0;
+    width: 0px;
+  }
+  100% {
+    opacity: 1;
+    width: 100%;
+  }
+}
 .chatText {
   color: whitesmoke;
 }
@@ -70,6 +82,18 @@ input[type=text] {
 #channelTag {
   float: right;
   text-align: right;
+}
+
+#msgBox {
+  overflow-y: scroll;
+  min-width: 100px;
+  height: 500px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#msgBox::-webkit-scrollbar {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
