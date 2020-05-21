@@ -24,10 +24,6 @@ h1{
     font-weight: bolder;
 }
 
-input[type=text]{
-    width: 75%;
-}
-
 .chatmsg, .mymsg{
     border: 2px solid black;
     border-radius: 5px;
@@ -79,12 +75,14 @@ input[type=text]{
     background-color: $panelColor;
     border: $panelBorder;
     border-style: double;
+    border-radius: 5px;
     margin-bottom: 20px;
 }
 
 #nameTag, #channelTag{
     color: black;
     width: 50%;
+    font-weight: bolder;
 }
 
 #nameTag{
@@ -95,6 +93,30 @@ input[type=text]{
     float: right;
     text-align: right;
 }
+
+input, select{
+    background-color: $backgroundColor;
+    color: $textColor;
+    border: $panelBorder;
+    border-style: groove;
+    border-radius: 5px;
+    width: 100%;
+    margin: 2px;
+}
+
+#msgToSend{
+    @extend input;
+    width: 78%;
+}
+
+button{
+    @extend input;
+    float: right;
+    width: 19%;
+}
+
+//#channelList:hover, #channelList:active{}
+
 
 #msgBox{
     overflow-y: scroll;

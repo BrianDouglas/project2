@@ -13,10 +13,6 @@ h1 {
   font-weight: bolder;
 }
 
-input[type=text] {
-  width: 75%;
-}
-
 .chatmsg, .mymsg {
   border: 2px solid black;
   border-radius: 5px;
@@ -67,12 +63,14 @@ input[type=text] {
   background-color: lightblue;
   border: black;
   border-style: double;
+  border-radius: 5px;
   margin-bottom: 20px;
 }
 
 #nameTag, #channelTag {
   color: black;
   width: 50%;
+  font-weight: bolder;
 }
 
 #nameTag {
@@ -82,6 +80,25 @@ input[type=text] {
 #channelTag {
   float: right;
   text-align: right;
+}
+
+input, button, #msgToSend, select {
+  background-color: #0043cc;
+  color: ivory;
+  border: black;
+  border-style: groove;
+  border-radius: 5px;
+  width: 100%;
+  margin: 2px;
+}
+
+#msgToSend {
+  width: 78%;
+}
+
+button {
+  float: right;
+  width: 19%;
 }
 
 #msgBox {
