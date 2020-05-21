@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
-channels = {"home": {datetime.now().strftime("%a, %H:%M:%S"): ["serverBot", "Server started. Home channel innitialized. WELCOME!"]}}
+channels = {"home": ([],{datetime.now().strftime("%a, %H:%M:%S"): ["serverBot", "Server started. Home channel innitialized. WELCOME!"]})}
 currentChannel = "home"
 
 @app.route("/")
@@ -26,14 +26,27 @@ def create_channel():
     if channelName in channels:
         return jsonify({"error": "Channel already exists. Try again."})
     elif channelName:
-        channels[channelName] = {datetime.now().strftime("%a, %H:%M:%S"): ["serverBot", "Channel has been created"]}
+        channels[channelName] = ([],{datetime.now().strftime("%a, %H:%M:%S"): ["serverBot", "Channel has been created"]})
         socketio.emit('new channel created')
     return jsonify([*channels]) #*channels returns the iterables of the dictionary. Brackets for as a list
 
 @app.route("/get_chat", methods=["Post"])
 def get_chat():
     channelName = request.form['channelName']
-    messages = channels[channelName]
+    newMember = request.form['member']
+    leavingChannel = request.form['leavingChannel']
+    leavingMembers = []
+    if leavingChannel and newMember:
+        try:
+            channels[leavingChannel][0].remove(newMember)
+            leavingMembers = channels[leavingChannel][0]
+        except:
+            print(f"FAILED TO REMOVE {newMember} from {leavingChannel}.")
+            return {"error":"Data incomplete"}
+    if newMember not in channels[channelName][0]:
+        channels[channelName][0].append(newMember)
+    members, messages = channels[channelName]
+    socketio.emit('members update', {"channel":channelName, "members":members, "previousChannel": leavingChannel, "previousMembers": leavingMembers})
     return jsonify(messages)
 
 @socketio.on("chat sent")
@@ -42,5 +55,5 @@ def chatSent(data):
     channel = data['currentChannel']
     user = data['user']
     timestamp = datetime.now().strftime("%a, %H:%M:%S")
-    channels[channel][timestamp] = [user, newMsg]
+    channels[channel][1][timestamp] = [user, newMsg]
     emit("incoming msg", {channel: {timestamp: [user, newMsg]}}, broadcast=True)

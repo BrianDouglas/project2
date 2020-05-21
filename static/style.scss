@@ -1,10 +1,10 @@
 $backgroundColor: rgb(0, 67, 204);
-$textColor: ivory;
+$textColor: black;
+$textColorLight: ivory;
 $panelColor: lightblue;
 $panelBorder: black;
 $sentColor: rgb(163, 0, 163);
 $receivedColor: rgb(156, 97, 156);
-$chatTextColor: whitesmoke;
 $timestampColor: black;
 $errorColor: red;
 
@@ -21,6 +21,10 @@ body{
 h1{
     padding: 20px;
     text-align: center;
+    font-weight: bolder;
+}
+
+h4{
     font-weight: bolder;
 }
 
@@ -55,7 +59,7 @@ h1{
 }
 
 .chatText{
-    color: $chatTextColor;
+    color: $textColorLight;
 }
 
 .timestamp{
@@ -96,7 +100,7 @@ h1{
 
 input, select{
     background-color: $backgroundColor;
-    color: $textColor;
+    color: $textColorLight;
     border: $panelBorder;
     border-style: groove;
     border-radius: 5px;

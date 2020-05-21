@@ -31,6 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
         getChannelList();
     });
 
+    socket.on('members update', data => {
+        if (localStorage.getItem("currentChannel") == data.channel){
+            repopMemberList(data.members);
+        }else if(localStorage.getItem("currentChannel") == data.previousChannel){
+            repopMemberList(data.previousMembers)
+        };
+    });
+
     if (!localStorage.getItem('displayName')){
         localStorage.setItem('displayName', prompt("give us a name"));
     };
@@ -107,11 +115,22 @@ function repopChannelList(channelsList){
     return
 };
 
+function repopMemberList(members){
+    document.getElementById('chatMembers').querySelectorAll("*").forEach(n=>n.remove());
+
+    for (i in members){
+        const item = document.createElement('li');
+        item.innerHTML = members[i];
+        document.getElementById('chatMembers').append(item);
+    };
+    return
+}
+
 function loadChat(){
-    var channelName = document.getElementById('channelList').value;
-    if (!channelName){
-        channelName = localStorage.getItem('currentChannel');
-    }
+
+    const channelName = document.getElementById('channelList').value;
+    const leavingChannel = localStorage.getItem('currentChannel');
+    //if (!channelName){channelName = localStorage.getItem('currentChannel')};
     localStorage.setItem("currentChannel", channelName);
     document.getElementById('channelTag').innerHTML = `Channel: ${channelName}`;
     
@@ -120,12 +139,17 @@ function loadChat(){
 
     request.onload = () =>{
         const chatLog = JSON.parse(request.responseText);
+        if (chatLog.error){
+            return
+        }
         document.querySelector("#msgBox").querySelectorAll("*").forEach(n=>n.remove());
         addToChat(chatLog);
     };
     
     const data = new FormData();
     data.append('channelName', channelName);
+    data.append('leavingChannel', leavingChannel)
+    data.append('member', localStorage.getItem('displayName'))
     request.send(data);
     return false;
 };

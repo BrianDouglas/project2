@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto Mono");
 body {
   background-color: #0043cc;
-  color: ivory;
+  color: black;
   font-family: "Roboto Mono";
   margin-left: 20px;
   margin-right: 20px;
@@ -10,6 +10,10 @@ body {
 h1 {
   padding: 20px;
   text-align: center;
+  font-weight: bolder;
+}
+
+h4 {
   font-weight: bolder;
 }
 
@@ -43,7 +47,7 @@ h1 {
   }
 }
 .chatText {
-  color: whitesmoke;
+  color: ivory;
 }
 
 .timestamp {
