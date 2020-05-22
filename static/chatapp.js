@@ -141,6 +141,7 @@ function loadChat(){
     request.onload = () =>{
         const chatLog = JSON.parse(request.responseText);
         if (chatLog.error){
+            console.log(chatLog.error);
             return
         }
         document.querySelector("#msgBox").querySelectorAll("*").forEach(n=>n.remove());
