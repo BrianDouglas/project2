@@ -27,7 +27,7 @@ h4 {
 .chatmsg {
   text-align: left;
   background-color: #9c619c;
-  animation: msg 0.5s;
+  animation: msg 0.5s ease;
 }
 
 .mymsg {
@@ -46,6 +46,23 @@ h4 {
     width: 100%;
   }
 }
+@keyframes error {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .chatText {
   color: ivory;
 }
@@ -55,7 +72,10 @@ h4 {
 }
 
 #channelCreationError {
+  font-weight: bolder;
+  position: relative;
   color: red;
+  animation: error 1s;
 }
 
 #chattyper {

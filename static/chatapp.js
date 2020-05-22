@@ -6,21 +6,24 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector("#newChannelForm").onsubmit = createChannel;
     document.querySelector("#channelList").onchange = loadChat;
     document.querySelector('#msgBox').onscroll = () => {
+        //sets the scrolled boolean to false if we are at the bottom of the div. True otherwise
         box = document.getElementById('msgBox');
         scrolled = box.scrollTop + box.offsetHeight <= box.scrollHeight - 1;;
     };
     document.getElementById("msgToSend").onkeyup = () => {
+        //allows us to use the enter key to send msgs
         if (event.keyCode == 13){
             document.getElementById('chatSend').click();
         };
     };
 
-    //configure send button
+    //SOCKETS
     socket.on('connect', () => {
         document.querySelector('#chatSend').onclick = sendChat;
     });
 
     socket.on('incoming msg', data => {
+        //checks if we're in the channel that the a new msg was added to. Adds it if so
         const thisChannel = localStorage.getItem("currentChannel");
         if ( thisChannel in data){
             addToChat(data[thisChannel]);
@@ -32,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     socket.on('members update', data => {
+        //checks to see if the person who moved channels requires the client to update their channel member list
         if (localStorage.getItem("currentChannel") == data.channel){
             repopMemberList(data.members);
         }else if(localStorage.getItem("currentChannel") == data.previousChannel){
@@ -39,13 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     });
 
+    //if the user is new, get a display name from them.
     if (!localStorage.getItem('displayName')){
         localStorage.setItem('displayName', prompt("give us a name"));
     };
+    //same for currentChannel
     if (!localStorage.getItem('currentChannel')){
         localStorage.setItem('currentChannel', "home")
     }
+    //init the user name display
     document.getElementById("nameTag").innerHTML = `Chatting as: ${localStorage.displayName}`;
+    //loadChat
     loadChat();
 });
 
@@ -62,7 +70,7 @@ function getChannelList(){
         const channelsList = JSON.parse(request.responseText);
 
         repopChannelList(channelsList);
-        //ensure currentChannel is still set
+        //ensure currentChannel is still set correctly
         document.getElementById('channelList').value = localStorage.getItem('currentChannel');
 
     };
@@ -83,20 +91,24 @@ function createChannel(){
         //clear input box
         document.getElementById('newChannelName').value = "";
         const channelsList = JSON.parse(request.responseText);
-            if ("error" in channelsList){
-                document.getElementById('channelCreationError').innerHTML = channelsList["error"];
-                return;
-            };
-        
+        //check if the server returned an error
+        if ("error" in channelsList){
+            var oldMsg = document.getElementById('channelCreationError')
+            var replaceMsg = oldMsg.cloneNode(true);
+            replaceMsg.innerHTML = channelsList["error"];
+            oldMsg.parentNode.replaceChild(replaceMsg, oldMsg)
+            return;
+        };
+        //clear error if success
+        document.getElementById('channelCreationError').innerHTML = "";
         repopChannelList(channelsList);
-
         //set newchannel to active
         document.getElementById('channelList').value = newChannel;
         //load chat channel contents from app
         loadChat();
     };
 
-    //send new channel
+    //data to send to server
     const data = new FormData();
     data.append('newChannel', newChannel);
     request.send(data);
@@ -130,7 +142,6 @@ function loadChat(){
 
     const channelName = document.getElementById('channelList').value;
     const leavingChannel = localStorage.getItem('currentChannel');
-    //if (!channelName){channelName = localStorage.getItem('currentChannel')};
     localStorage.setItem("currentChannel", channelName);
     document.getElementById('channelTag').innerHTML = `Channel: ${channelName}`;
     
@@ -139,13 +150,16 @@ function loadChat(){
 
     request.onload = () =>{
         const chatLog = JSON.parse(request.responseText);
+        //check if server returned an error and escape if so
         if (chatLog.error){
             return
         }
+        //clear msgs from previous channel
         document.querySelector("#msgBox").querySelectorAll("*").forEach(n=>n.remove());
         addToChat(chatLog);
     };
     
+    //data to send to server
     const data = new FormData();
     data.append('channelName', channelName);
     data.append('leavingChannel', leavingChannel)
@@ -157,11 +171,13 @@ function loadChat(){
 function addToChat(chatLog){
     for (msg in chatLog){
         const chatBox = document.createElement('div');
+        //style new chatbox differently if it's from the current user
         if (chatLog[msg][0] == localStorage.displayName){
             chatBox.className = "mymsg";
         }else{
             chatBox.className = "chatmsg";
         };
+        //added required info to msg
         const timestamp = document.createElement('span');
         const text = document.createElement("p");
         timestamp.className = "timestamp";
@@ -182,16 +198,9 @@ function sendChat(){
 }
 
 function updateScroll(){
+    //if we are not scrolled up, reset the scroll to the new bottom of the box
     const box = document.getElementById('msgBox');
     if (!scrolled){
         box.scrollTop = box.scrollHeight;
     };
 }
-
-//this function isn't currently being used
-function updateName(){
-    
-    localStorage.displayName = document.querySelector("#displayName").value;
-    document.getElementById("nameTag").innerHTML = `Chatting as: ${localStorage.displayName}`;
-    
-};
