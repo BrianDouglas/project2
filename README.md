@@ -4,7 +4,7 @@ Web Programming with Python and JavaScript
 
 ## The Files
 
-1. application.py
+### application.py
   1. This file runs our website. It's main function is keeping the "channels" data structure up to date. I'm not positive if it's a smart design or overly complicated but it's layers look like this:
     * A dictionary who's keys are the names of channels. Each channel maps to a tuple.
       * The first index is a list which contains the names of current members of that channel
@@ -13,7 +13,7 @@ Web Programming with Python and JavaScript
         * The second index is a string with the actual message text.
   2. It also contains all the routes and sockets we use to keep the information up to date on the client side
 
-2. static folder
+### static folder
   1. style.css/scss
     * I'm pretty proud of how the styling turned out.
     * It looks good on all size screens
@@ -27,7 +27,7 @@ Web Programming with Python and JavaScript
     * Functions like createChannel and loadChat make POST calls to the server to update or fetch data.
     * sendChat is the main function that interacts with the server from the client side.
 
-3. templates folder
+### templates folder
   1. layout.html
     * Pretty simple. Mostly just sets up the head of our page.
   2. index.html
