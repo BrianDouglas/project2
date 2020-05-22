@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('displayName', prompt("give us a name"));
     };
     if (!localStorage.getItem('currentChannel')){
-        localStorage.setItem('currentChannel', "home")
+        localStorage.setItem('currentChannel', "home");
     }
     document.getElementById("nameTag").innerHTML = `Chatting as: ${localStorage.displayName}`;
     loadChat();
@@ -128,9 +128,10 @@ function repopMemberList(members){
 
 function loadChat(){
 
-    const channelName = document.getElementById('channelList').value;
+    var channelName = document.getElementById('channelList').value;
     const leavingChannel = localStorage.getItem('currentChannel');
-    //if (!channelName){channelName = localStorage.getItem('currentChannel')};
+    //if one wasn't selected(as on initial page load) get it from local storage
+    if (!channelName){channelName = localStorage.getItem('currentChannel')};
     localStorage.setItem("currentChannel", channelName);
     document.getElementById('channelTag').innerHTML = `Channel: ${channelName}`;
     

@@ -1,7 +1,6 @@
 # Project 2
 
 Web Programming with Python and JavaScript
-<<<<<<< HEAD
 
 ## The Files
 
@@ -34,5 +33,3 @@ Web Programming with Python and JavaScript
   2. index.html
     * Sets up the body of our pages. Layout using bootstrap rows and column divs.
     
-=======
->>>>>>> parent of f218f49... house keeping for project turn in
