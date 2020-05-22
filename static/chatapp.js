@@ -130,8 +130,12 @@ function loadChat(){
 
     var channelName = document.getElementById('channelList').value;
     const leavingChannel = localStorage.getItem('currentChannel');
+<<<<<<< HEAD
     //if one wasn't selected(as on initial page load) get it from local storage
     if (!channelName){channelName = localStorage.getItem('currentChannel')};
+=======
+    //if (!channelName){channelName = localStorage.getItem('currentChannel')};
+>>>>>>> parent of f218f49... house keeping for project turn in
     localStorage.setItem("currentChannel", channelName);
     document.getElementById('channelTag').innerHTML = `Channel: ${channelName}`;
     
