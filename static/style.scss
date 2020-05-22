@@ -38,7 +38,7 @@ h4{
 .chatmsg{
     text-align: left;
     background-color: $receivedColor;
-    animation: msg 0.5s ease;
+    animation: msg 0.5s;
 }
 
 .mymsg{
@@ -58,24 +58,6 @@ h4{
     }
 }
 
-@keyframes error{
-    0%{
-        opacity: 1;
-    }
-    25%{
-        opacity: .25;
-    }
-    50%{
-        opacity: 1;
-    }
-    75%{
-        opacity: .25;
-    }
-    100%{
-        opacity: 1;
-    }
-}
-
 .chatText{
     color: $textColorLight;
 }
@@ -85,10 +67,7 @@ h4{
 }
 
 #channelCreationError{
-    font-weight: bolder;
-    position: relative;
     color: $errorColor;
-    animation: error 1.0s;
 }
 
 #chattyper{
@@ -139,6 +118,9 @@ button{
     float: right;
     width: 19%;
 }
+
+//#channelList:hover, #channelList:active{}
+
 
 #msgBox{
     overflow-y: scroll;
