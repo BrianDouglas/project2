@@ -1,6 +1,6 @@
 Flask
 Flask-SocketIO
 gunicorn
-gunicorn[eventlet]
+eventlet
 Werkzeug==0.16.0
 datetime
