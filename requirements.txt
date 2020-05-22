@@ -1,4 +1,5 @@
 Flask
 Flask-SocketIO
-os
+gunicorn
+Werkzeug==0.16.0
 datetime
