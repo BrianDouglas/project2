@@ -45,7 +45,7 @@ h4{
 .mymsg{
     text-align: right;
     background-color: $sentColor;
-    animation: msg 0.5s ease;
+    animation: msg 0.5s;
 }
 
 @keyframes msg{
@@ -59,6 +59,24 @@ h4{
     }
 }
 
+@keyframes error{
+    0%{
+        opacity: 1;
+    }
+    25%{
+        opacity: .25;
+    }
+    50%{
+        opacity: 1;
+    }
+    75%{
+        opacity: .25;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
 .chatText{
     color: $textColorLight;
 }
@@ -69,6 +87,9 @@ h4{
 
 #channelCreationError{
     color: $errorColor;
+    position: relative;
+    font-weight: bolder;
+    animation: error 1.0s;
 }
 
 #chattyper{
