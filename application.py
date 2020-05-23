@@ -93,6 +93,6 @@ def chatSent(data):
     #add the new msg
     channels[channel][1][timestamp] = [user, newMsg]
     #server terminal output to check max length isn't being exceeded
-    print("\n Number of messages in " + channel +" is currently " + str(len(channels[channel][1])))
+    print("\n Number of messages in " + channel +" is currently " + str(len(channels[channel][1])) + "\n")
     #send the new message out to clients to add if they are in that channel
     emit("incoming msg", {channel: {timestamp: [user, newMsg]}}, broadcast=True)
